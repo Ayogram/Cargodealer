@@ -1,0 +1,23 @@
+{
+  "name": "cargodealer",
+  "version": "1.0.0",
+  "description": "A static HTML/CSS/JS prototype that includes: - Red Star-inspired hero + quick-service panel - Tracking input (CDI-XXXXXX) with a 6-step timeline - Services section using your provided images (Air / Ocean / Courier) - Updated bottom quick-action strip using your provided icon images - Mission & Vision section redesigned into branded cards",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "google-auth-library": "^10.6.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.1",
+    "nodemailer": "^8.0.3"
+  }
+}

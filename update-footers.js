@@ -1,0 +1,92 @@
+const fs = require('fs');
+const path = require('path');
+
+const newFooter = `  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-contact">
+          <img src="assets/images/logo.png" alt="CargoDealer Logo" class="footer-logo" style="filter: brightness(0) invert(1); width: 140px; height: auto; display: block; margin-bottom: 20px;"/>
+          <p><strong>CargoDealer Nigeria Limited</strong></p>
+          <p>19 Allen Ave, Ikeja</p>
+          <p>Lagos, Nigeria</p>
+          <p>📞 +234 703 644 6393</p>
+          <div class="social-links" style="display:flex; gap:15px; margin-top:20px;">
+            <a href="https://web.facebook.com/profile.php?id=61560297002676" target="_blank" class="social-icon" style="background:#2b6cb0; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background 0.3s;">
+              <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.6 0 0 .6 0 1.325v21.351C0 23.4.6 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.6 1.323-1.324V1.325C24 .6 23.4 0 22.675 0z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/cargodealer_inc?igsh=OGp3N3Y3OXYyZ2o0" target="_blank" class="social-icon" style="background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background 0.3s;">
+              <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@cargodealer_inc?is_from_webapp=1&sender_device=pc" target="_blank" class="social-icon" style="background:#000000; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background 0.3s;">
+              <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.536.63 3.064 1.75 4.16 1.12 1.056 2.66 1.644 4.23 1.76v3.916c-1.405-.015-2.795-.316-4.055-.911-.12.871-.16 1.742-.16 2.612 0 3.235-1.748 6.273-4.576 7.625-2.827 1.353-6.148 1.137-8.775-.46-2.628-1.597-4.226-4.48-4.226-7.585 0-3.104 1.598-5.988 4.226-7.585 2.627-1.597 5.948-1.813 8.775-.46.33.155.65.33.95.53v1.38c-1.14-.54-2.42-.714-3.66-.5-1.24.215-2.37.818-3.17 1.7-1.114 1.258-1.574 2.94-1.282 4.6.292 1.661 1.31 3.125 2.822 4.055 1.512.93 3.328 1.155 4.992.624 1.663-.53 3.033-1.782 3.77-3.385.49-1.05.74-2.21.74-3.38V4.68A9.098 9.098 0 0 0 12.525.02z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="index.html#services">Air Freight</a></li>
+            <li><a href="index.html#services">Ocean Freight</a></li>
+            <li><a href="index.html#services">Courier</a></li>
+            <li><a href="track.html" data-open-track="1">Tracking</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Information</h4>
+          <ul>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="index.html#locations">Pickup Locations</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="dealer.html">Dealer Program</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms and Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 CargoDealerInc Logistics. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/2347036446393" target="_blank" class="wa-widget" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-5.824 4.74-10.563 10.564-10.563 5.826 0 10.564 4.738 10.564 10.562s-4.738 10.564-10.564 10.564z"/></svg>
+  </a>`;
+
+const dir = __dirname;
+const files = fs.readdirSync(dir);
+
+files.forEach(file => {
+  if (file.endsWith('.html') && file !== 'index.html') {
+    let content = fs.readFileSync(path.join(dir, file), 'utf8');
+    
+    // Check if there is an existing footer block to replace
+    const footerRegex = /<footer\b[^>]*>[\s\S]*?<\/footer>/gi;
+    if (footerRegex.test(content)) {
+      content = content.replace(footerRegex, newFooter);
+    } else {
+      // Find the first occurrence of </body> or <script
+      const insertAt = content.lastIndexOf('<script');
+      if (insertAt !== -1) {
+        content = content.substring(0, insertAt) + newFooter + '\n' + content.substring(insertAt);
+      } else {
+        const bodyAt = content.lastIndexOf('</body>');
+        if (bodyAt !== -1) {
+          content = content.substring(0, bodyAt) + newFooter + '\n' + content.substring(bodyAt);
+        } else {
+          content += newFooter;
+        }
+      }
+    }
+    
+    fs.writeFileSync(path.join(dir, file), content, 'utf8');
+    console.log('Updated ' + file);
+  }
+});

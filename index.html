@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>CargoDealerInc – Shipping Made Easy</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    /* Kingz Logistics specific overrides for Cargo Dealer */
+    .kingz-nav {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .kingz-nav .brand img { height: 50px; }
+    .kingz-menu { display: flex; gap: 30px; align-items: center; }
+    .kingz-menu a { color: #1a202c; font-weight: 600; text-decoration: none; font-size: 15px; transition: color 0.2s; }
+    .kingz-menu a:hover { color: var(--green); }
+    .kingz-ctas { display: flex; gap: 15px; }
+
+    .kingz-hero {
+      background: linear-gradient(135deg, #e6f0fa 0%, #f7fafc 100%);
+      padding: 80px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 600px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kingz-hero-content {
+      flex: 1;
+      max-width: 600px;
+      z-index: 2;
+    }
+    .kingz-hero-image {
+      flex: 1;
+      text-align: right;
+      z-index: 1;
+    }
+    .kingz-hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    .kingz-track-box {
+      background: #e2e8f0;
+      padding: 30px;
+      border-radius: 12px;
+      margin-top: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      max-width: 500px;
+    }
+    .kingz-track-box h3 { margin-bottom: 15px; font-size: 16px; color: #4a5568; font-weight: 600; }
+    .kingz-track-input-group {
+      display: flex;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #cbd5e0;
+    }
+    .kingz-track-input-group input {
+      flex: 1;
+      border: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      outline: none;
+    }
+    .kingz-track-input-group button {
+      background: #1a202c;
+      color: #fff;
+      border: none;
+      padding: 0 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .kingz-track-input-group button:hover { background: var(--green); }
+    
+    .kingz-section { padding: 80px 5%; }
+    .kingz-section-title { text-align: center; font-size: 36px; font-weight: 800; margin-bottom: 50px; color: #1a202c; }
+    
+    .kingz-about {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      background: #f8fafc;
+    }
+    .kingz-about-img { flex: 1; }
+    .kingz-about-img img { width: 100%; border-radius: 20px; }
+    .kingz-about-content { flex: 1; }
+    .kingz-about-content h2 { font-size: 32px; font-weight: 800; margin-bottom: 20px; color: #1a202c; line-height: 1.3; }
+    .kingz-about-content p { font-size: 16px; color: #4a5568; line-height: 1.7; margin-bottom: 30px; }
+
+    .kingz-reviews {
+      background: linear-gradient(rgba(30,45,59,0.9), rgba(30,45,59,0.9)), url('assets/images/hero-bg.png') center/cover;
+      color: #fff;
+      text-align: center;
+    }
+    .kingz-reviews h3 { color: #cbd5e0; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .kingz-reviews h2 { font-size: 40px; font-weight: 800; margin-bottom: 40px; }
+    .kingz-quote-icon { 
+      background: #63b3ed; color: #fff; width: 80px; height: 80px; 
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 40px; margin: 0 auto 30px; font-family: serif; font-weight: bold;
+    }
+    .kingz-review-text { max-width: 800px; margin: 0 auto 20px; font-size: 18px; line-height: 1.8; }
+    .kingz-reviewer { font-weight: bold; font-size: 20px; }
+    
+    .kingz-cta-section { text-align: center; padding: 100px 5%; background: #fff; }
+    .kingz-cta-section h2 { font-size: 42px; font-weight: 800; margin-bottom: 30px; color: #1a202c; }
+
+    /* Footer Image Fixes */
+    .footer-logo { filter: brightness(0) invert(1); width: 140px; height: auto; display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="kingz-nav">
+    <a class="brand" href="index.html">
+      <img src="assets/images/logo.png" alt="CargoDealer logo" style="height:50px;"/>
+    </a>
+    <div class="kingz-menu">
+      <a href="index.html">Home</a>
+      <a href="#services">Services</a>
+      <a href="#about">About Us</a>
+      <a href="track.html">Tracking</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="kingz-ctas">
+      <a href="login.html" class="btn secondary" style="text-decoration:none; display:flex; align-items:center;">Login</a>
+      <a href="register.html" class="btn primary" style="text-decoration:none; display:flex; align-items:center;">Sign Up</a>
+    </div>
+  </div>
+
+  <section class="kingz-hero">
+    <div class="kingz-hero-content">
+      <h1 style="font-size: 56px; font-weight: 900; color: #1a202c; line-height: 1.1; margin-bottom: 20px;">
+        Ship seamlessly<br>from the USA to Nigeria.
+      </h1>
+      <p style="font-size: 18px; color: #4a5568; line-height: 1.6; max-width: 90%;">
+        Unbeatable air, ocean & courier logistics — with reliable, credible tracking. Send items anywhere in the world and track every milestone.
+      </p>
+
+      <div class="kingz-track-box">
+        <h3>Track Your Shipment • Ship Now • Get a Quote</h3>
+        <div class="kingz-track-input-group">
+          <input type="text" id="mainTrackInput" placeholder="Enter Tracking Number (e.g. CDI-123456)"/>
+          <button type="button" onclick="window.location.href='track.html?id='+document.getElementById('mainTrackInput').value">TRACK</button>
+        </div>
+      </div>
+    </div>
+    <div class="kingz-hero-image">
+      <img src="assets/images/courier.png" alt="Cargo Delivery Boxes"/>
+    </div>
+  </section>
+
+  <section class="kingz-section" id="services">
+    <h2 class="kingz-section-title">Our Core Services</h2>
+    <div class="container">
+      <div class="cards">
+        <div class="card">
+          <div class="img" style="background-image:url('assets/images/air-freight.png')"></div>
+          <div class="body">
+            <div class="title">Air Freight</div>
+            <div class="text">Team of cargo experts available to help with queries and logistics. We study your needs and provide a quote that suits your budget.</div>
+            <div style="margin-top:10px;"><a href="get-quote.html" class="btn secondary" style="text-decoration:none; display:inline-block;">Get Quote</a></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="img" style="background-image:url('assets/images/ocean-freight.png')"></div>
+          <div class="body">
+            <div class="title">Ocean Freight</div>
+            <div class="text">International and bulk shipping support with traceability and milestone updates—ideal for larger consignments and cost-optimized routes.</div>
+            <div style="margin-top:10px;"><a href="get-quote.html" class="btn secondary" style="text-decoration:none; display:inline-block;">Get Quote</a></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="img" style="background-image:url('assets/images/courier.png')"></div>
+          <div class="body">
+            <div class="title">Courier & Logistics</div>
+            <div class="text">Warehousing and distribution services are regularly audited and improved to meet contemporary business needs.</div>
+            <div style="margin-top:10px;"><a href="get-quote.html" class="btn secondary" style="text-decoration:none; display:inline-block;">Get Quote</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works & Globe Infographic (Kingz Replica) -->
+  <section style="display: flex; flex-wrap: wrap; background-color: #f4f5f7; margin-top: -40px;">
+    <!-- Left Side: Dark Blue Instructions -->
+    <div style="flex: 1; min-width: 300px; background-color: #1e3a5f; color: white; padding: 60px 40px; display: flex; flex-direction: column; justify-content: center;">
+      <h2 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 30px; line-height: 1.2;">Shipping To & From Nigeria<br>Should Be More Reliable</h2>
+      <a href="#about" style="color: white; text-decoration: underline; font-weight: bold; margin-bottom: 40px; display: inline-block;">How Does It Work?</a>
+      
+      <div style="display: flex; gap: 30px; margin-bottom: 40px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 120px;">
+          <div style="font-size: 2rem; margin-bottom: 10px;">👤+</div>
+          <h4 style="font-weight: bold; margin-bottom: 5px;">Step 1.</h4>
+          <p style="font-size: 0.9rem; opacity: 0.9;">Sign Up Today!<br>It's simple</p>
+        </div>
+        <div style="flex: 1; min-width: 120px;">
+          <div style="font-size: 2rem; margin-bottom: 10px;">📍</div>
+          <h4 style="font-weight: bold; margin-bottom: 5px;">Step 2.</h4>
+          <p style="font-size: 0.9rem; opacity: 0.9;">Get A Free U.S.<br>Address</p>
+        </div>
+        <div style="flex: 1; min-width: 120px;">
+          <div style="font-size: 2rem; margin-bottom: 10px;">📦</div>
+          <h4 style="font-weight: bold; margin-bottom: 5px;">Step 3.</h4>
+          <p style="font-size: 0.9rem; opacity: 0.9;">Ship To & From<br>Nigeria With<br>Confidence</p>
+        </div>
+      </div>
+      
+      <a href="register.html" style="background-color: #2a3b52; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; align-self: flex-start; border: 1px solid rgba(255,255,255,0.2);">Sign Up Today</a>
+    </div>
+    
+    <!-- Right Side: Globe Infographic -->
+    <div style="flex: 1; min-width: 300px; background-color: #ebeae6; padding: 40px; display: flex; align-items: center; justify-content: center; position: relative;">
+      <img src="C:/Users/USER/.gemini/antigravity/brain/f0497f28-a733-4c8e-8d6d-0a98fd2a833b/shipping_globe_infographic_1774102730791.png" alt="Global Shipping Infographic" style="max-width: 100%; height: auto; border-radius: 50%;">
+      <!-- Play button overlay placeholder -->
+      <a href="#" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #1e3a5f; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <span style="margin-left: 5px;">▶</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Blue Confidence Banner (Kingz Replica) -->
+  <section style="background-color: #4ba6d5; color: #1e3a5f; padding: 60px 20px; text-align: center; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 250px;">
+    <!-- Abstract left background shape placeholder -->
+    <div style="position: absolute; left: -50px; bottom: -50px; width: 300px; height: 300px; background-color: rgba(255,255,255,0.1); transform: rotate(45deg);"></div>
+    
+    <div style="position: relative; z-index: 2; margin-left: auto; margin-right: 15%;">
+      <h2 style="font-size: 2.2rem; font-weight: bold; margin-bottom: 20px;">Ship, Send, & Receive With Confidence</h2>
+      <a href="register.html" style="background-color: #1e3a5f; color: white; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">Sign Up Today</a>
+    </div>
+  </section>
+
+  <!-- Why Choose Us / Stressful Banner (Kingz Replica) -->
+  <section style="background-color: #f4f5f7; padding: 80px 20px; text-align: center;">
+    <h2 style="font-size: 2.2rem; font-weight: bold; color: #333; margin-bottom: 50px;">Shipping To & From Nigeria Shouldn't Be So Stressful</h2>
+    
+    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto 40px;">
+      <!-- Feature 1 -->
+      <div style="flex: 1; min-width: 250px; text-align: left; display: flex; gap: 20px;">
+        <div style="background-color: #1e3a5f; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">💲</div>
+        <div>
+          <h3 style="color: #333; font-size: 1.2rem; margin-bottom: 10px; border-bottom: 2px solid #1e3a5f; padding-bottom: 5px; display: inline-block;">Good Savings</h3>
+          <p style="color: #666; font-size: 0.9rem; line-height: 1.5;">Save Money On Expensive<br>Shipping Costs</p>
+        </div>
+      </div>
+      <!-- Feature 2 -->
+      <div style="flex: 1; min-width: 250px; text-align: left; display: flex; gap: 20px;">
+        <div style="background-color: #1e3a5f; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">📍</div>
+        <div>
+          <h3 style="color: #333; font-size: 1.2rem; margin-bottom: 10px; border-bottom: 2px solid #1e3a5f; padding-bottom: 5px; display: inline-block;">Order Tracking</h3>
+          <p style="color: #666; font-size: 0.9rem; line-height: 1.5;">Reliable & Accurate Tracking Info.<br>Know when your goods arrive</p>
+        </div>
+      </div>
+      <!-- Feature 3 -->
+      <div style="flex: 1; min-width: 250px; text-align: left; display: flex; gap: 20px;">
+        <div style="background-color: #1e3a5f; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">🛡️</div>
+        <div>
+          <h3 style="color: #333; font-size: 1.2rem; margin-bottom: 10px; border-bottom: 2px solid #1e3a5f; padding-bottom: 5px; display: inline-block;">Safe & Secure</h3>
+          <p style="color: #666; font-size: 0.9rem; line-height: 1.5;">Safe & Dependable Shipping<br>Services</p>
+        </div>
+      </div>
+    </div>
+    
+    <a href="register.html" style="background-color: #1e3a5f; color: white; padding: 15px 35px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block;">SIGN UP TODAY</a>
+  </section>
+
+  <section class="kingz-section kingz-about" id="about">
+    <div class="kingz-about-img">
+      <img src="assets/images/about-us.png" alt="About CargoDealer" style="box-shadow: 0 10px 30px rgba(0,0,0,0.1);"/>
+    </div>
+    <div class="kingz-about-content">
+      <h2>CargoDealer provides the most reliable and dependable shipping service, so you can ship your goods with peace of mind.</h2>
+      <p>Shipping globally can be a frustrating experience. Packages are delayed, not handled with care, and flat-out expensive. We understand how irritating it is when your goods are not taken care of and how frustrating it is when they are not delivered on time.</p>
+      <p>Trusting a logistics business can be frightening. CargoDealer has set out to break the stereotype and set a new standard for services everywhere.</p>
+      <a href="register.html" class="btn primary" style="text-decoration:none; padding: 15px 30px; font-size: 16px;">Sign Up Today</a>
+    </div>
+  </section>
+
+  <section class="kingz-section kingz-reviews">
+    <div class="container" style="position: relative;">
+      <h3>Customer Reviews</h3>
+      <h2>See What Our Clients Speak</h2>
+      <div class="kingz-quote-icon">“</div>
+      
+      <div id="review-carousel" style="position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; min-height: 200px;">
+        <div class="review-slide active-slide" style="position: absolute; width: 100%; transition: opacity 0.5s ease; opacity: 1;">
+          <p class="kingz-review-text">
+            "I'm giving this review based on my experience so far with CargoDealer as one of the most reliable shipping companies. For more than two good years I have been shipping stuff with them, no item lost or missing. Therefore I recommend this shipping company as one of the best for whoever wants to ship reliably."
+          </p>
+          <div class="kingz-reviewer">- Anthony Mezue</div>
+        </div>
+        <div class="review-slide" style="position: absolute; width: 100%; transition: opacity 0.5s ease; opacity: 0; pointer-events: none;">
+          <p class="kingz-review-text">
+            "Extremely fast and reliable service. My packages arrived safely from the US to Nigeria without any hassle. The real-time tracking is a game changer for my business!"
+          </p>
+          <div class="kingz-reviewer">- Sarah O.</div>
+        </div>
+        <div class="review-slide" style="position: absolute; width: 100%; transition: opacity 0.5s ease; opacity: 0; pointer-events: none;">
+          <p class="kingz-review-text">
+            "I’ve used many logistics companies, but CargoDealer’s customer service and transparency are unmatched. Their quotes are accurate with no hidden fees."
+          </p>
+          <div class="kingz-reviewer">- Michael B.</div>
+        </div>
+      </div>
+
+      <div class="carousel-controls" style="margin-top: 30px; display: flex; justify-content: center; gap: 20px;">
+        <button onclick="changeSlide(-1)" style="background: transparent; border: 2px solid rgba(255,255,255,0.3); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">❮</button>
+        <button onclick="changeSlide(1)" style="background: transparent; border: 2px solid rgba(255,255,255,0.3); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">❯</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="kingz-section" id="faq" style="background: #f8fafc;">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="text-align: center; font-size: 36px; font-weight: 800; margin-bottom: 10px; color: #1a202c;">Frequently Asked Questions</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: #4a5568;">Find answers to common questions about our shipping and logistics services. For anything else, reach out on WhatsApp.</p>
+        
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-q"><span>How do I track my shipment?</span> <span>+</span></div>
+            <div class="faq-a">You can easily track your shipment by entering your 6-digit Tracking ID (e.g. CDI-123456) in the Track Shipment box on our homepage.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q"><span>How long does Air Freight take to arrive?</span> <span>+</span></div>
+            <div class="faq-a">Air Freight shipments typically arrive within 3-5 business days depending on the origin and destination hubs. Customs clearance may add an additional 1-2 days.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q"><span>Do you offer door-to-door delivery?</span> <span>+</span></div>
+            <div class="faq-a">Yes! Our courier and transportation services ensure that your package can be picked up from your address and delivered directly to the recipient's door safely and securely.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kingz-cta-section">
+    <h2>Ship, Send, & Receive With Confidence</h2>
+    <a href="register.html" class="btn primary" style="background: #1a202c; color: #fff; text-decoration: none; padding: 15px 40px; font-size: 18px; box-shadow: none;">Sign Up Today</a>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-contact">
+          <img src="assets/images/logo.png" alt="CargoDealer Logo" class="footer-logo"/>
+          <p><strong>CargoDealer Nigeria Limited</strong></p>
+          <p>19 Allen Ave, Ikeja</p>
+          <p>Lagos, Nigeria</p>
+          <p>📞 +234 703 644 6393</p>
+          <div class="social-links">
+            <a href="https://web.facebook.com/profile.php?id=61560297002676" target="_blank" class="social-icon">F</a>
+            <a href="https://www.instagram.com/cargodealer_inc?igsh=OGp3N3Y3OXYyZ2o0" target="_blank" class="social-icon">I</a>
+            <a href="https://www.tiktok.com/@cargodealer_inc?is_from_webapp=1&sender_device=pc" target="_blank" class="social-icon">T</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Air Freight</a></li>
+            <li><a href="#services">Ocean Freight</a></li>
+            <li><a href="#services">Courier</a></li>
+            <li><a href="track.html">Tracking</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Information</h4>
+          <ul>
+            <li><a href="#about">How It Works</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="dealer.html">Dealer Program</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms and Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 CargoDealerInc Logistics. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/2347036446393" target="_blank" class="wa-widget" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-5.824 4.74-10.563 10.564-10.563 5.826 0 10.564 4.738 10.564 10.562s-4.738 10.564-10.564 10.564z"/></svg>
+  </a>
+
+  <!-- Floating Chatbot Widget -->
+  <div id="ai-chatbox" style="position:fixed; bottom:80px; right:20px; width:320px; height:420px; background:#fff; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.15); z-index:1001; display:flex; flex-direction:column; overflow:hidden; transition: all 0.3s; display:none; border: 1px solid #e2e8f0;">
+    <div style="background:#1a202c; color:#fff; padding:15px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;">
+      <span style="display:flex; align-items:center; gap:8px;">🤖 AI Assistant</span>
+      <button onclick="toggleChat()" style="background:none; border:none; color:#fff; cursor:pointer; font-size:16px;">✖</button>
+    </div>
+    <div id="chat-messages" style="flex:1; padding:15px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; background:#f8fafc; font-size:14px;">
+      <div style="align-self:flex-start; background:#e2e8f0; padding:12px; border-radius:8px 8px 8px 0; max-width:85%; line-height:1.5;">Hi! I'm the CargoDealer AI. How can I assist you with your logistics or tracking today?</div>
+    </div>
+    <div style="padding:10px; background:#fff; border-top:1px solid #e2e8f0; display:flex; gap:8px;">
+      <input type="text" id="chat-input" placeholder="Type a question..." style="flex:1; padding:10px; border:1px solid #cbd5e0; border-radius:6px; outline:none;" onkeypress="if(event.key==='Enter') sendChat()">
+      <button onclick="sendChat()" style="background:#1a202c; color:#fff; border:none; padding:10px 18px; border-radius:6px; cursor:pointer; font-weight:bold;">Send</button>
+    </div>
+  </div>
+
+  <button onclick="toggleChat()" style="position:fixed; bottom:20px; right:80px; background:#1a202c; color:#fff; width:56px; height:56px; border-radius:50%; border:none; box-shadow:0 4px 15px rgba(0,0,0,0.2); cursor:pointer; z-index:1000; font-size:24px; display:flex; align-items:center; justify-content:center; transition: background 0.2s;">💬</button>
+
+  <script src="js/app.js"></script>
+  <script>
+    // AI Chatbox Logic
+    let chatOpen = false;
+
+    function toggleChat() {
+      chatOpen = !chatOpen;
+      document.getElementById('ai-chatbox').style.display = chatOpen ? 'flex' : 'none';
+      if(chatOpen) document.getElementById('chat-input').focus();
+    }
+
+    function sendChat() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+      
+      const msgs = document.getElementById('chat-messages');
+      // User message
+      msgs.innerHTML += `<div style="align-self:flex-end; background:#2b6cb0; color:#fff; padding:12px; border-radius:8px 8px 0 8px; max-width:85%; line-height:1.5;">${text}</div>`;
+      input.value = '';
+      msgs.scrollTop = msgs.scrollHeight;
+
+      // AI Response
+      setTimeout(() => {
+        let reply = getSmartReply(text.toLowerCase());
+        msgs.innerHTML += `<div style="align-self:flex-start; background:#e2e8f0; padding:12px; border-radius:8px 8px 8px 0; max-width:85%; line-height:1.5;">${reply}</div>`;
+        msgs.scrollTop = msgs.scrollHeight;
+      }, 600);
+    }
+
+    function getSmartReply(q) {
+      if (q.includes('track') || q.includes('where')) {
+        if (q.includes('not moved') || q.includes('hasn\'t moved') || q.includes('when')) {
+          return "If your tracking hasn't updated recently, it's likely pending customs clearance or in transit between regional hubs. Please message our support team directly on <a href='https://wa.me/2347036446393' target='_blank' style='color:#2b6cb0; text-decoration:underline; font-weight:bold;'>WhatsApp (+234 703 644 6393)</a> with your tracking ID so we can investigate immediately.";
+        }
+        return "You can track your shipment using the tracking box on our homepage. Just enter your 6-digit ID (e.g., CDI-123456).";
+      }
+      if (q.includes('country') || q.includes('countries') || q.includes('where to') || q.includes('ship to')) return "We currently specialize in shipping from the USA, UK, and China directly to Nigeria. We offer both Door Delivery and Office Pickup options in Lagos.";
+      if (q.includes('trust') || q.includes('reliable') || q.includes('safe') || q.includes('secure')) return "CargoDealer evaluates as highly trustworthy! We are a registered entity (CargoDealer Nigeria Limited) operating under strict regulatory standards. We handle thousands of packages annually with a zero-loss track record, providing transparent, real-time tracking for every single item.";
+      if (q.includes('start') || q.includes('how long operating') || q.includes('history') || q.includes('when did you')) return "CargoDealer has been proudly operating and optimizing the USA-to-Nigeria logistics pipeline for several years, building a dominant reputation for speed, security, and affordability.";
+      if (q.includes('how long') || q.includes('days') || q.includes('time')) return "Air freight usually takes 3-5 business days. Ocean freight takes 4-6 weeks depending on customs clearance.";
+      if (q.includes('cost') || q.includes('price') || q.includes('quote') || q.includes('fee')) return "You can get a quick estimate using our 'Get Quote' page from the menu above. It calculates dimensional vs actual weight automatically in USD and NGN.";
+      if (q.includes('hi') || q.includes('hello')) return "Hello! How can I assist you with your shipping needs today?";
+      if (q.includes('insurance') || q.includes('fragile')) return "We offer insurance coverage! Fragile items like TVs have an additional handling fee. Check the Get Quote page or reach out for details.";
+      
+      return "I'm not exactly sure about that. Please reach out to our human agents on <a href='https://wa.me/2347036446393' target='_blank' style='color:#2b6cb0; text-decoration:underline; font-weight:bold;'>WhatsApp (+234 703 644 6393)</a> for detailed assistance and complaints.";
+    }
+  </script>
+  <script>
+    // FAQ Accordion 
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        item.classList.toggle('open');
+        q.querySelector('span:last-child').textContent = item.classList.contains('open') ? '−' : '+';
+      });
+    });
+
+    // Carousel Logic
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.review-slide');
+    
+    function showSlide(index) {
+      slides.forEach(slide => {
+        slide.style.opacity = '0';
+        slide.style.pointerEvents = 'none';
+      });
+      slides[index].style.opacity = '1';
+      slides[index].style.pointerEvents = 'auto';
+    }
+
+    function changeSlide(direction) {
+      currentSlide = (currentSlide + direction + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+    
+    // Auto advance every 6 seconds
+    setInterval(() => {
+      changeSlide(1);
+    }, 6000);
+  </script>
+</body>
+</html>

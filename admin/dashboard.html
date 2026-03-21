@@ -1,0 +1,51 @@
+
+<!doctype html><html><head>
+<title>Admin Dashboard – CargoDealer</title>
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+<div class="nav">
+<div class="container">
+<h2>CargoDealer Admin</h2>
+<span class="badge">Staff</span>
+</div>
+</div>
+
+<div class="container">
+<h1>Dashboard</h1>
+
+<div class="grid three">
+<div class="card"><h3>Total Shipments</h3><strong>124</strong></div>
+<div class="card"><h3>In Transit</h3><strong>38</strong></div>
+<div class="card"><h3>Delivered</h3><strong>72</strong></div>
+</div>
+
+<h2 style="margin-top:40px">Shipments</h2>
+<div class="card">
+<table class="table">
+<tr><th>Tracking ID</th><th>Route</th><th>Status</th><th>Action</th></tr>
+<tr><td>CDI-102938</td><td>Lagos → PH</td><td class="status green">In Transit</td><td><button class="secondary">Edit</button></td></tr>
+<tr><td>CDI-445566</td><td>Abuja → Lagos</td><td class="status green">Delivered</td><td><button class="secondary">Edit</button></td></tr>
+<tr><td>CDI-778899</td><td>Uyo → Calabar</td><td class="status gray">Pickup Scheduled</td><td><button class="secondary">Edit</button></td></tr>
+</table>
+</div>
+
+<h2 style="margin-top:40px">Update Shipment</h2>
+<div class="card grid two">
+<input placeholder="Tracking ID"/>
+<select>
+<option>Booking Confirmed</option>
+<option>Pickup Scheduled</option>
+<option>Picked Up</option>
+<option>In Transit</option>
+<option>Arrived at Destination Hub</option>
+<option>Delivered</option>
+</select>
+<textarea placeholder="Staff notes" style="grid-column:1/-1;padding:12px;border-radius:10px;border:1px solid #d1d5db"></textarea>
+<button style="grid-column:1/-1">Save Update</button>
+</div>
+</div>
+
+</body></html>
