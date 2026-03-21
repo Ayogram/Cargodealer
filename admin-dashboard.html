@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | CargoDealerInc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-body admin-body">
+
+    <header class="dash-header" style="background: #1a233a;">
+        <div class="dash-container">
+            <div class="dash-nav-top">
+                <a href="index.html" class="dash-brand">
+                    <img src="assets/images/logo.png" alt="Logo" style="filter: brightness(0) invert(1);">
+                </a>
+                <div class="dash-tabs">
+                    <button class="tab-link active">🛡️ Admin Overview</button>
+                    <button class="logout-btn" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dash-content-area">
+        <div class="dash-container">
+            <div class="welcome-section">
+                <h1>Admin Master Control</h1>
+                <p>Viewing all customer shipments across the system.</p>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h2>Global Order Management</h2>
+                    <div class="admin-tools">
+                        <button class="btn small" onclick="loadAllAdminOrders()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="dash-table">
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>TRACKING ID</th>
+                                <th>CUSTOMER</th>
+                                <th>DESTINATION</th>
+                                <th>STATUS</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminOrdersBody">
+                            <!-- Loaded via admin JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const user = JSON.parse(localStorage.getItem('cargodealer_user'));
+            const token = localStorage.getItem('cargodealer_token');
+
+            if (!token || user.role !== 'admin') {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            loadAllAdminOrders();
+
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('cargodealer_token');
+                localStorage.removeItem('cargodealer_user');
+                window.location.href = 'login.html';
+            });
+        });
+
+        async function loadAllAdminOrders() {
+            const tbody = document.getElementById('adminOrdersBody');
+            tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Fetching global orders...</td></tr>';
+
+            try {
+                const response = await fetch('/api/shipments', {
+                    headers: { 'x-auth-token': localStorage.getItem('cargodealer_token') }
+                });
+                const orders = await response.json();
+
+                tbody.innerHTML = '';
+                orders.forEach(order => {
+                    const date = new Date(order.createdAt).toLocaleDateString();
+                    const statusText = ['Ready', 'Processing', 'In Transit', 'Arrived', 'Out for Delivery', 'Delivered'][order.currentIndex] || 'Unknown';
+                    
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${date}</td>
+                            <td><strong>${order.trackingId}</strong></td>
+                            <td>${order.shipper || 'User'}</td>
+                            <td>${order.shippingTo}</td>
+                            <td><span class="status-pill stage-${order.currentIndex}">${statusText}</span></td>
+                            <td>
+                                <select onchange="updateStatus('${order.trackingId}', this.value)" style="padding: 5px; border-radius: 4px;">
+                                    <option value="">Update Status...</option>
+                                    <option value="1">Processing</option>
+                                    <option value="2">In Transit</option>
+                                    <option value="3">Arrived</option>
+                                    <option value="4">Out for Delivery</option>
+                                    <option value="5">Delivered</option>
+                                </select>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Error loading system orders.</td></tr>';
+            }
+        }
+
+        async function updateStatus(trackingId, index) {
+            if(!index) return;
+            try {
+                const response = await fetch('/api/shipments/' + trackingId, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-auth-token': localStorage.getItem('cargodealer_token')
+                    },
+                    body: JSON.stringify({ 
+                        currentIndex: parseInt(index),
+                        staffNote: "Status updated by admin."
+                    })
+                });
+
+                if(response.ok) {
+                    alert('Status updated successfully!');
+                    loadAllAdminOrders();
+                }
+            } catch (err) {
+                alert('Update failed');
+            }
+        }
+    </script>
+
+    <style>
+        .status-pill {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .stage-0 { background: #e3f2fd; color: #1976d2; }
+        .stage-1 { background: #fff3e0; color: #f57c00; }
+        .stage-2 { background: #f3e5f5; color: #7b1fa2; }
+        .stage-5 { background: #e8f5e9; color: #2e7d32; }
+    </style>
+</body>
+</html>

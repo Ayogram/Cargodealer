@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Simulated Success – CargoDealerInc</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <style>
+    body {
+      background-color: #f7fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    .icon {
+      width: 80px;
+      height: 80px;
+      background: #e8f5e9;
+      color: #1f7a39;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 40px;
+    }
+    h1 { color: #1a202c; margin-bottom: 10px; }
+    p { color: #4a5568; line-height: 1.6; margin-bottom: 30px; }
+    .btn {
+      background: #1f7a39;
+      color: white;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #165c2b; }
+    .countdown { font-size: 14px; color: #a0aec0; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="successCard">
+    <div class="icon">✓</div>
+    <h1 id="title">Identity Verified</h1>
+    <p id="message">
+      Successfully authenticated with your provider. Your identity handshake is complete and secure.
+    </p>
+    <a href="dashboard.html" class="btn">Proceed to Dashboard</a>
+    <div class="countdown" id="countdown">Redirecting in 5 seconds...</div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const provider = params.get('provider') || 'Gateway';
+    document.getElementById('title').textContent = `${provider} Verification Successful`;
+    document.getElementById('message').textContent = `Your ${provider} account has been linked. We've received your profile data and established a secure session.`;
+
+    let timeLeft = 5;
+    const interval = setInterval(() => {
+      timeLeft--;
+      document.getElementById('countdown').textContent = `Redirecting in ${timeLeft} seconds...`;
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        window.location.href = 'dashboard.html';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

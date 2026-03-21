@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | CargoDealerInc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+</head>
+<body class="dashboard-body">
+
+    <!-- Global Header (Modified for Dashboard) -->
+    <header class="dash-header">
+        <div class="dash-container">
+            <div class="dash-nav-top">
+                <a href="index.html" class="dash-brand">
+                    <img src="assets/images/logo.png" alt="Logo">
+                </a>
+                <div class="dash-tabs" id="dashTabs">
+                    <button class="tab-link active" data-tab="dashboard">
+                        <span class="icon">📊</span> Dashboard
+                    </button>
+                    <button class="tab-link" data-tab="create">
+                        <span class="icon">📦</span> Create Shipment
+                    </button>
+                    <button class="tab-link" data-tab="orders">
+                        <span class="icon">🚚</span> Shipping Orders
+                    </button>
+                    <button class="tab-link" data-tab="notifications">
+                        <span class="icon">🔔</span> <span class="badge" id="notifBadge">0</span> Notifications
+                    </button>
+                    <button class="tab-link" data-tab="profile">
+                        <span class="icon">👤</span> My Profile
+                    </button>
+                    <button class="logout-btn" id="logoutBtn">
+                        <span class="icon">↪️</span> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dash-content-area">
+        <div class="dash-container">
+            
+            <!-- Tab: Dashboard -->
+            <section id="tab-dashboard" class="tab-pane active">
+                <div class="welcome-section">
+                    <h1 id="welcomeUser">Hello, User</h1>
+                    <p>How are you today?</p>
+                </div>
+
+                <div class="dash-grid-top">
+                    <div class="stat-card action-card" onclick="switchTab('create')">
+                        <div class="card-icon">🎁</div>
+                        <div class="card-info">
+                            <h3>Create New Shipment</h3>
+                            <p class="highlight">Click Here to Ship</p>
+                            <span class="subtext">Register your item(s)</span>
+                        </div>
+                    </div>
+                    <div class="stat-card address-card">
+                        <div class="card-info">
+                            <h3>My US-Based Shipping Address</h3>
+                            <p class="address-text" id="usAddress">Loading...</p>
+                        </div>
+                    </div>
+                    <div class="stat-card tracking-card">
+                        <div class="card-icon">🔗</div>
+                        <div class="card-info">
+                            <h3>Latest Shipment Tracking</h3>
+                            <p id="latestTracking">No active shipments</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="card-icon">👥</div>
+                        <div class="card-info">
+                            <h3>My Recipients</h3>
+                            <p class="highlight">View / Add</p>
+                            <span class="subtext">People you ship to</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="id-warning-banner" id="idWarning">
+                    <span>⚠️ Our records show you have Not provided a verified government issued ID. Your goods Will Not ship until we have an ID.</span>
+                    <button class="btn small inverse">Upload an ID now</button>
+                </div>
+
+                <div class="dash-main-grid">
+                    <div class="main-left">
+                        <div class="content-card">
+                            <div class="card-header">
+                                <h2>Last 2 Received Orders</h2>
+                                <a href="#" onclick="switchTab('orders')">Received Orders</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="dash-table">
+                                    <thead>
+                                        <tr>
+                                            <th>DATE RECEIVED</th>
+                                            <th>ITEM(S)</th>
+                                            <th>SHIPPING TO</th>
+                                            <th>STATUS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentOrdersBody">
+                                        <tr>
+                                            <td colspan="4" class="empty-state">No data available in table</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-right">
+                        <div class="content-card preferences-card">
+                            <h3>My Shipment Preferences</h3>
+                            <div class="pref-items">
+                                <label class="pref-item">
+                                    <input type="checkbox" id="prefAutoShip">
+                                    <div class="pref-content">
+                                        <strong>Auto-ship Weekly (no confirmation)</strong>
+                                        <p>Any of your items received within the cut-off time of our weekly shipment will be shipped as received</p>
+                                    </div>
+                                </label>
+                                <label class="pref-item">
+                                    <input type="checkbox" id="prefAskBefore">
+                                    <div class="pref-content">
+                                        <strong>Ask before Shipping Weekly</strong>
+                                        <p>We will contact you to know if you are expecting additional item(s) other than what we received before shipping</p>
+                                    </div>
+                                </label>
+                                <label class="pref-item">
+                                    <input type="checkbox" id="prefConsolidate">
+                                    <div class="pref-content">
+                                        <strong>Consolidate/Don't Consolidate</strong>
+                                        <p>If this is checked, we will consolidate your items and ship them together one time</p>
+                                    </div>
+                                </label>
+                            </div>
+                            <button class="btn feedback-btn">💬 Feedback</button>
+                        </div>
+                        <div class="content-card announcement-card">
+                            <h3>Announcement</h3>
+                            <div class="ann-item">
+                                <span class="date">03/20/2026</span>
+                                <p>Important update regarding Easter shipping schedules...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Create Shipment -->
+            <section id="tab-create" class="tab-pane">
+                <div class="content-card">
+                    <div class="form-header">
+                        <h2>📦 Add Shipment</h2>
+                        <p>Create New Shipping Order</p>
+                    </div>
+                    <form id="createShipmentForm" class="ship-form">
+                        <div class="form-grid">
+                            <!-- Left Col -->
+                            <div class="form-section">
+                                <div class="freight-type">
+                                    <label><input type="radio" name="service" value="Air Freight" checked> Air Freight</label>
+                                    <label><input type="radio" name="service" value="Ocean Freight"> Ocean Freight</label>
+                                    <label><input type="radio" name="service" value="Courier"> Choose for Me</label>
+                                </div>
+                                
+                                <div class="field-group">
+                                    <h4>Destination</h4>
+                                    <input type="text" name="route" placeholder="e.g. Lagos, Nigeria" required>
+                                </div>
+
+                                <div class="field-group">
+                                    <h4>Sender</h4>
+                                    <input type="text" id="senderName" placeholder="Your Name" readonly>
+                                    <input type="text" id="senderEmail" placeholder="Your Email" readonly>
+                                </div>
+
+                                <div class="field-group">
+                                    <h4>Recipient</h4>
+                                    <div class="row">
+                                        <input type="text" name="recipFirst" placeholder="First Name" required>
+                                        <input type="text" name="recipLast" placeholder="Last Name" required>
+                                    </div>
+                                    <input type="email" name="recipEmail" placeholder="Email Address" required>
+                                    <input type="text" name="recipPhone" placeholder="Phone Number" required>
+                                    <textarea name="recipAddress" placeholder="Full Delivery Address" required></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Right Col -->
+                            <div class="form-section">
+                                <div class="items-editor">
+                                    <h4>Item(s) in this package</h4>
+                                    <table class="items-table" id="itemsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Qty</th>
+                                                <th>Description</th>
+                                                <th>Value ($)</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="number" class="item-qty" value="1" min="1"></td>
+                                                <td><input type="text" class="item-desc" placeholder="Item description"></td>
+                                                <td><input type="number" class="item-val" value="0.00" step="0.01"></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="button" class="btn small outline" id="addItemBtn">+ More</button>
+                                    <div class="total-bar">
+                                        <span>Total Value:</span>
+                                        <strong id="totalValueDisplay">$0.00</strong>
+                                    </div>
+                                </div>
+
+                                <div class="upload-feature">
+                                    <h4>Upload Feature (Optional)</h4>
+                                    <div class="drop-zone" id="dropZone">
+                                        Drag and Drop Files Here or Click to Upload
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn primary full mt-20">🖨️ Submit Shipment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Tab: Shipping Orders -->
+            <section id="tab-orders" class="tab-pane">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>🚚 My Shipping Orders</h2>
+                    </div>
+                    <div class="table-controls">
+                        <div class="export-btns">
+                            <button class="btn small">Copy</button>
+                            <button class="btn small">Print</button>
+                            <button class="btn small">Excel</button>
+                            <button class="btn small">PDF</button>
+                        </div>
+                        <input type="text" id="orderSearch" placeholder="Search orders...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="dash-table">
+                            <thead>
+                                <tr>
+                                    <th>ORDER DATE</th>
+                                    <th>SHIPMENT #</th>
+                                    <th>RECIPIENT</th>
+                                    <th>SHIPPING TO</th>
+                                    <th>STATUS</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allOrdersBody">
+                                <!-- Loaded via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Notifications -->
+            <section id="tab-notifications" class="tab-pane"></section>
+
+            <!-- Tab: My Profile -->
+            <section id="tab-profile" class="tab-pane"></section>
+
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# Environment Variables
+.env
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Local Gemini Brain & Logs
+.gemini/
+.agents/
+.agent/
+_agents/
+_agent/
+brain/
+logs/
+
+# Build outputs
+dist/
+build/
+
+# OS Files
+.DS_Store
+Thumbs.db

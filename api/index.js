@@ -25,7 +25,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/shipments', shipmentRoutes);
-app.use('/api/track', shipmentRoutes); // Using same route file, handling logic there
+app.use('/api/track', shipmentRoutes);
+app.use('/api/dashboard', require('./routes/dashboard'));
 
 // Root API Endpoint
 app.get('/api', (req, res) => {
@@ -34,9 +35,15 @@ app.get('/api', (req, res) => {
 
 // Since Vercel Serverless Functions doesn't require app.listen
 // If running locally via regular node:
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-}
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`-----------------------------------------------`);
+  console.log(`🚀 Server started on http://localhost:${PORT}`);
+  console.log(`🔌 API Base URL: http://localhost:${PORT}/api`);
+  console.log(`-----------------------------------------------`);
+});
+
+// Keep process alive for background testing
+process.stdin.resume();
 
 module.exports = app;

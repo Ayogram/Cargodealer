@@ -1,12 +1,25 @@
+body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #1a202c; background: #f7fafc; line-height: 1.6; }
 
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#0b1220;background:#fff}
-.container{max-width:1100px;margin:0 auto;padding:60px 20px}
-h1,h2{margin:0 0 16px}
-.lead{color:#4b5563;max-width:70ch}
-.grid{display:grid;gap:20px}
-.grid.two{grid-template-columns:1fr 1fr}
-.card{border:1px solid #e5e7eb;border-radius:16px;padding:24px}
-input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db}
-button{background:#1f7a39;color:#fff;border:none;border-radius:10px;padding:14px 18px;font-weight:800;cursor:pointer}
-.small{font-size:13px;color:#6b7280}
-footer{border-top:1px solid #e5e7eb;padding:20px 0;margin-top:60px;color:#6b7280}
+/* Legal Page Hero Section */
+.legal-hero { background: linear-gradient(135deg, #04101E 0%, #153E75 100%); color: white; padding: 140px 20px 100px; text-align: center; }
+.legal-hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; letter-spacing: -1px; }
+.legal-hero .lead { color: #bae6fd; font-size: 18px; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+
+/* Legal Content Container & Card */
+.legal-container { max-width: 900px; margin: -60px auto 80px; padding: 0 20px; position: relative; z-index: 10; }
+.legal-card { background: #fff; border-radius: 16px; padding: 50px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); border: 1px solid #edf2f7; margin-bottom: 30px; }
+
+.legal-card h2 { color: #1a202c; font-size: 24px; margin-top: 30px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #f1f5f9; font-weight: 700; }
+.legal-card h2:first-child { margin-top: 0; }
+.legal-card p { color: #4a5568; margin-bottom: 20px; font-size: 16px; line-height: 1.7; }
+.legal-card ul { color: #4a5568; padding-left: 20px; margin-bottom: 20px; line-height: 1.7; }
+.legal-card li { margin-bottom: 8px; }
+
+.last-updated { text-align: center; color: #64748b; font-size: 14px; margin-bottom: 40px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .legal-hero { padding: 120px 20px 60px; }
+  .legal-hero h1 { font-size: 36px; }
+  .legal-card { padding: 30px 20px; }
+}

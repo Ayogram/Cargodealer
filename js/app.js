@@ -12,6 +12,14 @@ const STATUSES = [
 const modal = document.getElementById("trackModal");
 const openers = document.querySelectorAll("[data-open-track]");
 const closeModalBtn = document.getElementById("closeModal");
+const trackBtn = document.getElementById("trackBtn");
+const trackInput = document.getElementById("trackingInput");
+const trackBtnModal = document.getElementById("trackBtnModal");
+const trackingInputModal = document.getElementById("trackingInputModal");
+const quoteBtn = document.getElementById("quoteBtn");
+const bookBtn = document.getElementById("bookBtn");
+const loginBtn = document.getElementById("loginBtn");
+const dealerBtn = document.getElementById("dealerBtn");
 
 function openTrackModal(prefill = "") {
   modal.classList.add("open");
@@ -32,10 +40,12 @@ openers.forEach(el => el.addEventListener("click", (e) => {
   openTrackModal();
 }));
 
-closeModalBtn.addEventListener("click", closeTrackModal);
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) closeTrackModal();
-});
+if (closeModalBtn) closeModalBtn.addEventListener("click", closeTrackModal);
+if (modal) {
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeTrackModal();
+  });
+}
 
 document.querySelectorAll(".qa").forEach(el => {
   el.addEventListener("click", () => {
@@ -45,24 +55,25 @@ document.querySelectorAll(".qa").forEach(el => {
   });
 });
 
-const trackBtn = document.getElementById("trackBtn");
-const trackInput = document.getElementById("trackingInput");
-
-trackBtn.addEventListener("click", () => {
-  openTrackModal(trackInput.value.trim());
-  runTrack();
-});
-document.getElementById("trackBtnModal").addEventListener("click", runTrack);
-
-document.getElementById("trackingInputModal").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") runTrack();
-});
-trackInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
+if (trackBtn && trackInput) {
+  trackBtn.addEventListener("click", () => {
     openTrackModal(trackInput.value.trim());
     runTrack();
-  }
-});
+  });
+  trackInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      openTrackModal(trackInput.value.trim());
+      runTrack();
+    }
+  });
+}
+
+if (trackBtnModal) trackBtnModal.addEventListener("click", runTrack);
+if (trackingInputModal) {
+  trackingInputModal.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") runTrack();
+  });
+}
 
 function isValidTracking(id) {
   return /^CDI-\d{6}$/.test(id);
@@ -152,17 +163,27 @@ async function runTrack() {
   }
 }
 
-document.getElementById("quoteBtn").addEventListener("click", () => {
-  alert("Prototype: This will open the multi-step Get Quote wizard in Webflow.");
-});
-document.getElementById("bookBtn").addEventListener("click", () => {
-  alert("Prototype: This will open Book Shipment (and optionally prefill from QuoteRef).");
-});
-document.getElementById("loginBtn").addEventListener("click", () => {
-  window.location.href = "login.html";
-});
-document.getElementById("dealerBtn").addEventListener("click", () => {
-  window.location.href = "dealer.html";
-});
+if (quoteBtn) {
+  quoteBtn.addEventListener("click", () => {
+    alert("Prototype: This will open the multi-step Get Quote wizard in Webflow.");
+  });
+}
+if (bookBtn) {
+  bookBtn.addEventListener("click", () => {
+    alert("Prototype: This will open Book Shipment (and optionally prefill from QuoteRef).");
+  });
+}
+if (loginBtn) {
+  loginBtn.addEventListener("click", () => {
+    window.location.href = "login.html";
+  });
+}
+if (dealerBtn) {
+  dealerBtn.addEventListener("click", () => {
+    window.location.href = "dealer.html";
+  });
+}
 
-renderEmpty();
+if (document.getElementById("timeline")) {
+  renderEmpty();
+}

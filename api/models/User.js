@@ -10,7 +10,17 @@ const userSchema = new mongoose.Schema({
     enum: ['admin', 'dealer', 'customer'], 
     default: 'customer' 
   },
-  isVerified: { type: Boolean, default: false }
+  isVerified: { type: Boolean, default: false },
+  otp: { type: String, default: null },
+  otpExpires: { type: Date, default: null },
+  hasVerifiedID: { type: Boolean, default: false },
+  phone: { type: String, default: '' },
+  suiteNumber: { type: String, default: '' }, // e.g., '150-5628'
+  preferences: {
+    autoShip: { type: Boolean, default: false },
+    askBeforeShip: { type: Boolean, default: true },
+    consolidate: { type: Boolean, default: false },
+  }
 }, { timestamps: true });
 
 // Hash password before saving
