@@ -307,6 +307,7 @@ router.post('/google', checkDB, async (req, res) => {
     const payload = ticket.getPayload();
     const { sub, email, name, picture } = payload;
 
+    const isAdmin = ALLOWED_ADMINS.includes(email);
     let user = await User.findOne({ email });
 
     if (!user) {
@@ -315,9 +316,13 @@ router.post('/google', checkDB, async (req, res) => {
         name,
         email,
         password: Math.random().toString(36).slice(-10), // Random password for oauth users
-        role: 'customer',
+        role: isAdmin ? 'admin' : 'customer',
         isVerified: true // Google accounts are pre-verified
       });
+      await user.save();
+    } else if (isAdmin && user.role !== 'admin') {
+      // Upgrade existing user to admin if they are on the list
+      user.role = 'admin';
       await user.save();
     }
 
