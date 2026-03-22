@@ -11,144 +11,126 @@
 </head>
 <body class="dashboard-body">
 
-    <!-- Global Header (Modified for Dashboard) -->
-    <header class="dash-header">
-        <div class="dash-container">
-            <div class="dash-nav-top">
-                <a href="index.html" class="dash-brand">
-                    <img src="assets/images/logo.png" alt="Logo">
-                </a>
-                <div class="dash-tabs" id="dashTabs">
-                    <button class="tab-link active" data-tab="dashboard">
-                        <span class="icon">📊</span> Dashboard
-                    </button>
-                    <button class="tab-link" data-tab="create">
-                        <span class="icon">📦</span> Create Shipment
-                    </button>
-                    <button class="tab-link" data-tab="orders">
-                        <span class="icon">🚚</span> Shipping Orders
-                    </button>
-                    <button class="tab-link" data-tab="notifications">
-                        <span class="icon">🔔</span> <span class="badge" id="notifBadge">0</span> Notifications
-                    </button>
-                    <button class="tab-link" data-tab="profile">
-                        <span class="icon">👤</span> My Profile
-                    </button>
-                    <button class="logout-btn" id="logoutBtn">
-                        <span class="icon">↪️</span> Logout
-                    </button>
-                </div>
-            </div>
+    <!-- Global Header -->
+    <aside class="dash-sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/images/logo.png" alt="Logo">
         </div>
-    </header>
+        <nav class="sidebar-nav" id="sidebarNav">
+            <a class="nav-link active" data-tab="dashboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Dashboard
+            </a>
+            <a class="nav-link" data-tab="create">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                Ship Items
+            </a>
+            <a class="nav-link" data-tab="orders">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                Logistic Ledger
+            </a>
+            <a class="nav-link" data-tab="notifications">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                Alerts <span class="badge" id="notifBadge">0</span>
+            </a>
+            <a class="nav-link" data-tab="profile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Account Profile
+            </a>
+        </nav>
+    </aside>
 
-    <main class="dash-content-area">
-        <div class="dash-container">
-            
+    <main class="dash-layout-main">
+        <header class="layout-header" style="background:white; border-bottom:1px solid #f1f5f9; box-shadow:0 2px 10px rgba(0,0,0,0.02); height:70px;">
+            <div class="header-breadcrumb">
+                <span style="color:var(--text-muted); font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Pages / <span id="breadcrumbSection">Dashboard</span></span>
+                <h4 id="pageTitle" style="margin:2px 0 0; font-weight:800; font-size:18px; color:var(--navy); letter-spacing:-0.02em;">Dashboard Overview</h4>
+            </div>
+            <div class="header-profile" style="display:flex; align-items:center; gap:24px;">
+                <div style="text-align:right; border-right:1px solid #f1f5f9; padding-right:20px;">
+                    <p id="topBarUser" style="margin:0; font-weight:700; font-size:14px; color:var(--navy);">User Name</p>
+                    <small style="color:#10b981; font-size:11px; font-weight:600;">Lagos HQ Member</small>
+                </div>
+                <button class="logout-btn" id="logoutBtn" style="margin:0; background:#f8fafc; color:var(--navy); border:1px solid #e2e8f0; font-weight:600; font-size:12px; padding:8px 16px; border-radius:8px;">Logout</button>
+            </div>
+        </header>
+
+        <div class="layout-content">
             <!-- Tab: Dashboard -->
             <section id="tab-dashboard" class="tab-pane active">
                 <div class="welcome-section">
-                    <h1 id="welcomeUser">Hello, User</h1>
-                    <p>How are you today?</p>
+                    <h1 id="welcomeUser" style="font-size:24px;">Hello, User</h1>
+                    <p style="font-size:14px;">Logistics activity summary.</p>
                 </div>
 
                 <div class="dash-grid-top">
-                    <div class="stat-card action-card" onclick="switchTab('create')">
-                        <div class="card-icon">🎁</div>
-                        <div class="card-info">
-                            <h3>Create New Shipment</h3>
-                            <p class="highlight">Click Here to Ship</p>
-                            <span class="subtext">Register your item(s)</span>
+                    <div class="stat-card" style="cursor:pointer;" onclick="switchTab('create')">
+                        <div class="card-icon icon-emerald">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                         </div>
-                    </div>
-                    <div class="stat-card address-card">
                         <div class="card-info">
-                            <h3>My US-Based Shipping Address</h3>
-                            <p class="address-text" id="usAddress">Loading...</p>
-                        </div>
-                    </div>
-                    <div class="stat-card tracking-card">
-                        <div class="card-icon">🔗</div>
-                        <div class="card-info">
-                            <h3>Latest Shipment Tracking</h3>
-                            <p id="latestTracking">No active shipments</p>
+                            <h3>Quick Action</h3>
+                            <p class="highlight">New Shipment</p>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="card-icon">👥</div>
+                        <div class="card-icon icon-blue">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
                         <div class="card-info">
-                            <h3>My Recipients</h3>
-                            <p class="highlight">View / Add</p>
-                            <span class="subtext">People you ship to</span>
+                            <h3>Lagos Office</h3>
+                            <p style="font-size:12px; font-weight:600; line-height:1.4; color:var(--navy);">72, Adeniyi Jones, Ikeja</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="id-warning-banner" id="idWarning">
-                    <span>⚠️ Our records show you have Not provided a verified government issued ID. Your goods Will Not ship until we have an ID.</span>
-                    <button class="btn small inverse">Upload an ID now</button>
+                    <div class="stat-card">
+                        <div class="card-icon icon-amber">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        </div>
+                        <div class="card-info">
+                            <h3>Last Seen</h3>
+                            <p id="latestTracking" style="font-size:16px;">Office Intake</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="dash-main-grid">
                     <div class="main-left">
                         <div class="content-card">
                             <div class="card-header">
-                                <h2>Last 2 Received Orders</h2>
-                                <a href="#" onclick="switchTab('orders')">Received Orders</a>
+                                <h2>Recent Logistics Overview</h2>
+                                <a href="#" onclick="switchTab('orders')" style="color:var(--primary); font-size:13px; font-weight:600; text-decoration:none;">View All</a>
                             </div>
                             <div class="table-responsive">
                                 <table class="dash-table">
                                     <thead>
                                         <tr>
-                                            <th>DATE RECEIVED</th>
-                                            <th>ITEM(S)</th>
-                                            <th>SHIPPING TO</th>
+                                            <th>DATE</th>
+                                            <th>DESCRIPTION</th>
+                                            <th>ROUTE</th>
                                             <th>STATUS</th>
                                         </tr>
                                     </thead>
                                     <tbody id="recentOrdersBody">
-                                        <tr>
-                                            <td colspan="4" class="empty-state">No data available in table</td>
-                                        </tr>
+                                        <tr><td colspan="4" class="empty-state">Securely fetching logistics data...</td></tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <div class="main-right">
-                        <div class="content-card preferences-card">
-                            <h3>My Shipment Preferences</h3>
-                            <div class="pref-items">
-                                <label class="pref-item">
-                                    <input type="checkbox" id="prefAutoShip">
-                                    <div class="pref-content">
-                                        <strong>Auto-ship Weekly (no confirmation)</strong>
-                                        <p>Any of your items received within the cut-off time of our weekly shipment will be shipped as received</p>
-                                    </div>
+                        <div class="content-card">
+                            <h3 style="font-size:15px; margin-bottom:20px; color:var(--navy); font-weight:700;">Account Settings</h3>
+                            <div style="display:flex; flex-direction:column; gap:16px;">
+                                <label style="display:flex; gap:12px; cursor:pointer;">
+                                    <input type="checkbox" id="prefAutoShip" style="width:18px; height:18px; accent-color:var(--primary);">
+                                    <span style="font-size:13px; line-height:1.4;"><strong>Auto-ship</strong><br><small style="color:var(--text-muted);">Direct export on arrival</small></span>
                                 </label>
-                                <label class="pref-item">
-                                    <input type="checkbox" id="prefAskBefore">
-                                    <div class="pref-content">
-                                        <strong>Ask before Shipping Weekly</strong>
-                                        <p>We will contact you to know if you are expecting additional item(s) other than what we received before shipping</p>
-                                    </div>
-                                </label>
-                                <label class="pref-item">
-                                    <input type="checkbox" id="prefConsolidate">
-                                    <div class="pref-content">
-                                        <strong>Consolidate/Don't Consolidate</strong>
-                                        <p>If this is checked, we will consolidate your items and ship them together one time</p>
-                                    </div>
+                                <label style="display:flex; gap:12px; cursor:pointer;">
+                                    <input type="checkbox" id="prefConsolidate" style="width:18px; height:18px; accent-color:var(--primary);">
+                                    <span style="font-size:13px; line-height:1.4;"><strong>Consolidation</strong><br><small style="color:var(--text-muted);">Bundle multiple items</small></span>
                                 </label>
                             </div>
-                            <button class="btn feedback-btn">💬 Feedback</button>
-                        </div>
-                        <div class="content-card announcement-card">
-                            <h3>Announcement</h3>
-                            <div class="ann-item">
-                                <span class="date">03/20/2026</span>
-                                <p>Important update regarding Easter shipping schedules...</p>
-                            </div>
+                            <button class="btn outline small" style="width:100%; margin-top:24px; border:1px solid var(--border); font-size:12px;">Contact Support</button>
                         </div>
                     </div>
                 </div>
@@ -157,80 +139,79 @@
             <!-- Tab: Create Shipment -->
             <section id="tab-create" class="tab-pane">
                 <div class="content-card">
-                    <div class="form-header">
-                        <h2>📦 Add Shipment</h2>
-                        <p>Create New Shipping Order</p>
+                    <div style="margin-bottom:32px;">
+                        <h2 style="font-size:22px; font-weight:800; color:var(--navy);">New Shipment Request</h2>
+                        <p style="color:var(--text-muted); font-size:14px;">Register your package here, then drop it off at our Lagos HQ.</p>
                     </div>
-                    <form id="createShipmentForm" class="ship-form">
+                    <form id="createShipmentForm">
                         <div class="form-grid">
-                            <!-- Left Col -->
                             <div class="form-section">
-                                <div class="freight-type">
-                                    <label><input type="radio" name="service" value="Air Freight" checked> Air Freight</label>
-                                    <label><input type="radio" name="service" value="Ocean Freight"> Ocean Freight</label>
-                                    <label><input type="radio" name="service" value="Courier"> Choose for Me</label>
+                                <div style="background:var(--bg-main); padding:24px; border-radius:12px; margin-bottom:32px; border:1px solid var(--border);">
+                                    <h4 style="margin-bottom:16px; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted);">Freight Method</h4>
+                                    <div style="display:flex; gap:24px;">
+                                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:600; font-size:13px;">
+                                            <input type="radio" name="service" value="Air" checked style="width:18px; height:18px; accent-color:var(--primary);"> 
+                                            Air Export (Express)
+                                        </label>
+                                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:600; font-size:13px;">
+                                            <input type="radio" name="service" value="Sea" style="width:18px; height:18px; accent-color:var(--primary);"> 
+                                            Sea Export (Bulk)
+                                        </label>
+                                    </div>
                                 </div>
                                 
                                 <div class="field-group">
-                                    <h4>Destination</h4>
-                                    <input type="text" name="route" placeholder="e.g. Lagos, Nigeria" required>
+                                    <h4>Final Destination Hub</h4>
+                                    <input type="text" name="route" placeholder="City, Country" required>
                                 </div>
-
-                                <div class="field-group">
-                                    <h4>Sender</h4>
-                                    <input type="text" id="senderName" placeholder="Your Name" readonly>
-                                    <input type="text" id="senderEmail" placeholder="Your Email" readonly>
-                                </div>
-
-                                <div class="field-group">
-                                    <h4>Recipient</h4>
-                                    <div class="row">
+                                <div class="field-group" style="margin-top:24px;">
+                                    <h4>Recipient Profile</h4>
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
                                         <input type="text" name="recipFirst" placeholder="First Name" required>
                                         <input type="text" name="recipLast" placeholder="Last Name" required>
                                     </div>
-                                    <input type="email" name="recipEmail" placeholder="Email Address" required>
-                                    <input type="text" name="recipPhone" placeholder="Phone Number" required>
-                                    <textarea name="recipAddress" placeholder="Full Delivery Address" required></textarea>
+                                    <input type="email" name="recipEmail" placeholder="Email Address" required style="margin-bottom:12px;">
+                                    <input type="text" name="recipPhone" placeholder="Phone Number" required style="margin-bottom:12px;">
+                                    <textarea name="recipAddress" placeholder="Physical Address" required style="height:100px;"></textarea>
                                 </div>
                             </div>
-
-                            <!-- Right Col -->
                             <div class="form-section">
-                                <div class="items-editor">
-                                    <h4>Item(s) in this package</h4>
-                                    <table class="items-table" id="itemsTable">
-                                        <thead>
+                                <h4>Package Content</h4>
+                                <div style="border:1.5px solid #e2e8f0; border-radius:16px; overflow:hidden; margin-bottom:24px; background:white;">
+                                    <table class="dash-table" id="itemsTable">
+                                        <thead style="background:#f8fafc;">
                                             <tr>
-                                                <th>Qty</th>
-                                                <th>Description</th>
-                                                <th>Value ($)</th>
-                                                <th></th>
+                                                <th style="width:70px; padding:16px; font-size:10px; font-weight:800; color:var(--text-muted);">QTY</th>
+                                                <th style="padding:16px; font-size:10px; font-weight:800; color:var(--text-muted);">DESCRIPTION</th>
+                                                <th style="width:100px; padding:16px; font-size:10px; font-weight:800; color:var(--text-muted);">WEIGHT (KG)</th>
+                                                <th style="width:100px; padding:16px; font-size:10px; font-weight:800; color:var(--text-muted); text-align:right;">CHARGE ($)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><input type="number" class="item-qty" value="1" min="1"></td>
-                                                <td><input type="text" class="item-desc" placeholder="Item description"></td>
-                                                <td><input type="number" class="item-val" value="0.00" step="0.01"></td>
-                                                <td></td>
+                                            <tr style="border-top:1px solid #f1f5f9;">
+                                                <td style="padding:12px;"><input type="number" class="item-qty" value="1" min="1" oninput="calculateTotal()" style="width:100%; border:none; background:transparent; font-weight:700; text-align:center; color:var(--navy);"></td>
+                                                <td style="padding:12px;"><input type="text" class="item-desc" placeholder="Item name..." style="width:100%; border:none; background:transparent; font-weight:500;"></td>
+                                                <td style="padding:12px;"><input type="number" class="item-weight" value="1.0" min="0.1" step="0.1" oninput="calculateTotal()" style="width:100%; border:none; background:transparent; font-weight:700; text-align:center; color:#10b981;"></td>
+                                                <td style="padding:12px; text-align:right;"><span class="item-charge" style="font-weight:800; color:var(--navy);">$10.00</span></td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn small outline" id="addItemBtn">+ More</button>
-                                    <div class="total-bar">
-                                        <span>Total Value:</span>
-                                        <strong id="totalValueDisplay">$0.00</strong>
-                                    </div>
                                 </div>
+                                <button type="button" class="btn outline small" id="addItemBtn" style="width:100%; border:1.5px dashed #cbd5e1; background:#f8fafc; color:var(--text-muted); height:45px; font-weight:600; font-size:13px; border-radius:12px; transition:all 0.2s; margin-bottom:32px;">+ Add Another Item</button>
 
-                                <div class="upload-feature">
-                                    <h4>Upload Feature (Optional)</h4>
-                                    <div class="drop-zone" id="dropZone">
-                                        Drag and Drop Files Here or Click to Upload
+                                <div class="pricing-card" style="background:#0f172a; padding:40px; border-radius:24px; text-align:center; color:white; box-shadow:0 20px 40px rgba(15,23,42,0.25);">
+                                    <div class="currency-selector" style="background:rgba(255,255,255,0.05); padding:6px; border-radius:14px; display:inline-flex; gap:6px; margin-bottom:24px; border:1px solid rgba(255,255,255,0.1);">
+                                        <button type="button" id="toggleUSD" onclick="setCurrency('USD')" class="curr-btn active" style="padding:10px 24px; border:none; border-radius:10px; cursor:pointer; font-size:11px; font-weight:800; background:#10b981; color:white; box-shadow:0 4px 12px rgba(16,185,129,0.3);">USD ($)</button>
+                                        <button type="button" id="toggleNGN" onclick="setCurrency('NGN')" class="curr-btn" style="padding:10px 24px; border:none; border-radius:10px; cursor:pointer; font-size:11px; font-weight:800; background:transparent; color:rgba(255,255,255,0.4);">NGN (₦)</button>
                                     </div>
+                                    <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.5); margin-bottom:8px;">Total Logistics Value</p>
+                                    <h2 id="totalValueDisplay" style="font-size:48px; font-weight:800; color:#10b981; margin:0; letter-spacing:-0.03em;">$10.00</h2>
+                                    <button type="submit" class="btn primary" style="margin-top:32px; width:100%; border-radius:14px; padding:18px; font-size:15px; background:#10b981; border:none; font-weight:800; box-shadow:0 10px 20px rgba(16,185,129,0.2);">Initialize Official Invoice</button>
                                 </div>
-
-                                <button type="submit" class="btn primary full mt-20">🖨️ Submit Shipment</button>
+                                    <p style="font-size:10px; opacity:0.6; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Estimated Total Value</p>
+                                    <h2 id="totalValueDisplay" style="font-size:32px; font-weight:800; color:#10b981; margin:0;">$0.00</h2>
+                                    <button type="submit" class="btn primary" style="margin-top:24px; width:100%; border-radius:10px; font-size:14px; background:#10b981;">Initialize Logistic Label</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -241,43 +222,95 @@
             <section id="tab-orders" class="tab-pane">
                 <div class="content-card">
                     <div class="card-header">
-                        <h2>🚚 My Shipping Orders</h2>
-                    </div>
-                    <div class="table-controls">
-                        <div class="export-btns">
-                            <button class="btn small">Copy</button>
-                            <button class="btn small">Print</button>
-                            <button class="btn small">Excel</button>
-                            <button class="btn small">PDF</button>
-                        </div>
-                        <input type="text" id="orderSearch" placeholder="Search orders...">
+                        <h2>Personal Logistics Ledger</h2>
+                        <input type="text" id="orderSearch" placeholder="Filter IDs..." style="max-width:200px; padding:8px 12px; font-size:12px;">
                     </div>
                     <div class="table-responsive">
                         <table class="dash-table">
                             <thead>
                                 <tr>
-                                    <th>ORDER DATE</th>
-                                    <th>SHIPMENT #</th>
+                                    <th>DATE</th>
+                                    <th>ID</th>
                                     <th>RECIPIENT</th>
-                                    <th>SHIPPING TO</th>
+                                    <th>DESTINATION</th>
                                     <th>STATUS</th>
-                                    <th>ACTION</th>
                                 </tr>
                             </thead>
-                            <tbody id="allOrdersBody">
-                                <!-- Loaded via JS -->
-                            </tbody>
+                            <tbody id="allOrdersBody"></tbody>
                         </table>
                     </div>
                 </div>
             </section>
 
             <!-- Tab: Notifications -->
-            <section id="tab-notifications" class="tab-pane"></section>
+            <section id="tab-notifications" class="tab-pane">
+                <div class="content-card">
+                    <h2 style="font-size:20px; font-weight:700; color:var(--navy); margin-bottom:24px;">Logistic Alerts</h2>
+                    <div id="notifList" style="display:flex; flex-direction:column; gap:12px;">
+                        <p class="empty-state">No new alerts.</p>
+                    </div>
+                </div>
+            </section>
 
             <!-- Tab: My Profile -->
-            <section id="tab-profile" class="tab-pane"></section>
+            <section id="tab-profile" class="tab-pane">
+                <div class="profile-grid" style="display:grid; grid-template-columns:320px 1fr; gap:32px;">
+                    <div class="profile-avatar-sec" style="background:white; border:1px solid #f1f5f9; padding:40px; border-radius:24px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.03);">
+                        <div class="profile-photo-area" style="position:relative; width:120px; height:120px; margin:0 auto 24px;">
+                            <div id="profilePhotoDisplay" style="width:100%; height:100%; border-radius:50%; background:#f8fafc; display:flex; align-items:center; justify-content:center; overflow:hidden; border:4px solid #10b981; box-shadow:0 0 20px rgba(16,185,129,0.1);">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            </div>
+                            <input type="file" id="photoInput" style="display:none;" onchange="previewPhoto(this)">
+                            <button onclick="document.getElementById('photoInput').click()" style="position:absolute; bottom:5px; right:5px; background:#10b981; color:white; border:none; width:34px; height:34px; border-radius:50%; cursor:pointer; box-shadow:0 4px 12px rgba(16,185,129,0.4); display:flex; align-items:center; justify-content:center; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"></path></svg>
+                            </button>
+                        </div>
+                        <h3 id="profileNameDisplay" style="margin:0; font-weight:800; color:var(--navy); font-size:20px; letter-spacing:-0.02em;">User Account</h3>
+                        <p id="profileEmailDisplay" style="font-size:13px; color:var(--text-muted); margin:6px 0 0; font-weight:500;">Profile details...</p>
+                        
+                        <div style="margin-top:40px; padding-top:40px; border-top:1px solid #f1f5f9;">
+                            <a href="https://wa.me/234XXXXXXXXXX" target="_blank" style="background:#25D366; color:white; text-decoration:none; padding:14px; border-radius:12px; display:flex; align-items:center; justify-content:center; gap:10px; font-weight:700; font-size:13px; transition:transform 0.2s; box-shadow:0 8px 20px rgba(37,211,102,0.2);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.63 1.438h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+                                WhatsApp Support
+                            </a>
+                        </div>
+                    </div>
+                    <div class="content-card" style="margin-bottom:0; background:white; border-radius:24px; padding:40px; border:1px solid #f1f5f9; box-shadow:0 10px 30px rgba(0,0,0,0.03);">
+                        <h3 style="margin-bottom:32px; font-weight:800; color:var(--navy); font-size:22px; letter-spacing:-0.03em;">Logistics Meta & Security</h3>
+                        <form id="profileUpdateForm">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px;">
+                                <div class="form-group">
+                                    <label style="font-size:10px; font-weight:800; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:10px; letter-spacing:0.1em;">Full Legal Name</label>
+                                    <input type="text" id="profName" required style="width:100%; border:1.5px solid #e2e8f0; border-radius:12px; padding:14px; font-weight:600; color:var(--navy); background:#f8fafc;">
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-size:10px; font-weight:800; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:10px; letter-spacing:0.1em;">Direct Mobile</label>
+                                    <input type="tel" id="profPhone" placeholder="+234..." style="width:100%; border:1.5px solid #e2e8f0; border-radius:12px; padding:14px; font-weight:600; color:var(--navy);">
+                                </div>
+                            </div>
+                            
+                            <div style="margin:32px 0; padding:24px; background:#f8fafc; border-radius:16px; border:1px solid #f1f5f9;">
+                                <div style="display:flex; gap:16px; margin-bottom:20px; align-items:center;">
+                                    <input type="checkbox" id="prefAutoShip" style="width:20px; height:20px; accent-color:#10b981;">
+                                    <div style="flex:1;">
+                                        <p style="margin:0; font-size:14px; font-weight:700; color:var(--navy);">Auto-ship Pilot</p>
+                                        <small style="color:var(--text-muted); font-size:12px;">Direct export initialization on office intake.</small>
+                                    </div>
+                                </div>
+                                <div style="display:flex; gap:16px; align-items:center;">
+                                    <input type="checkbox" id="prefConsolidate" style="width:20px; height:20px; accent-color:#10b981;">
+                                    <div style="flex:1;">
+                                        <p style="margin:0; font-size:14px; font-weight:700; color:var(--navy);">Bulk Consolidation</p>
+                                        <small style="color:var(--text-muted); font-size:12px;">Merge multiple Lagos packages into one export trail.</small>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <button type="submit" class="btn primary" style="width:100%; background:#10b981; border:none; border-radius:14px; padding:18px; font-weight:800; letter-spacing:0.02em; color:white; box-shadow:0 10px 20px rgba(16,185,129,0.15); font-size:15px;">Update Security Vault</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 

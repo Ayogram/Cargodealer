@@ -82,39 +82,17 @@
     <div id="errorMsg" class="error-msg"></div>
     <div id="successMsg" class="success-msg"></div>
 
-    <form id="adminLoginForm">
-      <div id="loginFields">
-        <div class="form-group">
-          <label>Admin Email</label>
-          <input type="email" id="email" placeholder="admin@cargodealer.inc" required>
-        </div>
-        <div class="form-group">
-          <label>Master Password</label>
-          <input type="password" id="password" placeholder="••••••••" required>
-        </div>
-      </div>
-
-      <div id="otpFields" style="display:none;">
-        <div class="form-group">
-          <label style="text-align:center;">6-Digit Security Code</label>
-          <input type="text" id="otp" class="otp-input" placeholder="000000" maxlength="6">
-        </div>
-        <p style="font-size:12px; color:#718096; text-align:center;">Check your admin email for the code.</p>
-      </div>
-
-      <button type="submit" class="btn-submit" id="submitBtn">Authenticate</button>
-      
-      <div style="text-align: center; margin: 20px 0; color: #a0aec0; font-size: 13px; position:relative;">
-        <hr style="border:none; border-top:1px solid #e2e8f0; position:absolute; top:7px; width:100%; z-index:1;">
-        <span style="background:#fff; padding:0 10px; position:relative; z-index:2;">or</span>
-      </div>
-      
-      <div id="googleBtnContainer" style="width: 100%; display: flex; justify-content: center; margin-top: 10px;"></div>
-    </form>
+    <div id="googleBtnContainer" style="width: 100%; min-height: 48px; display: flex; justify-content: center; margin: 32px 0;"></div>
+    
+    <div class="link-text" style="border-top: 1px solid #f1f5f9; padding-top: 24px; margin-top: 24px;">
+      <a href="index.html" style="color:var(--text-muted); font-size:12px;">Return to Public Portal</a>
+    </div>
+  </div>
   </div>
 
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script>
-    // Global Error Monitoring
+    // Global Error Monitoring... (existing)
     window.onerror = function(msg, url, line) {
       const errorMsg = document.getElementById('errorMsg');
       if (errorMsg) {
@@ -124,7 +102,6 @@
       return false;
     };
 
-    // Protocol Guard logic below...
     document.addEventListener('DOMContentLoaded', () => {
       // 1. PROTOCOL GUARD
       if (window.location.protocol === 'file:') {
@@ -143,39 +120,34 @@
         document.body.appendChild(guard);
         return;
       }
+    });
 
-      // 2. INITIALIZE REAL GOOGLE SIGN-IN (Background)
+    function initGoogleAuth() {
       const clientId = "506898969583-f24k6jld869iq6hv303jqt3rk58le9f0.apps.googleusercontent.com";
       if (typeof google !== 'undefined') {
+        console.log("Initializing Google Auth...");
         google.accounts.id.initialize({
           client_id: clientId, 
           callback: handleGoogleResponse
         });
         
-        // Render the REAL button (This is the only way to get the Gmail-style popup)
         google.accounts.id.renderButton(
           document.getElementById("googleBtnContainer"),
           { 
             theme: "outline", 
             size: "large", 
-            width: 320,
+            width: 360,
             text: "signin_with",
             shape: "rectangular",
             logo_alignment: "left"
           }
         );
       }
-    });
+    }
+    window.addEventListener('load', initGoogleAuth);
+    document.addEventListener('DOMContentLoaded', initGoogleAuth);
 
-    // Google Action Check for Admin
     function startGoogleLogin() {
-      const clientId = "506898969583-f24k6jld869iq6hv303jqt3rk58le9f0.apps.googleusercontent.com";
-      if (!clientId || clientId.includes("PLACEHOLDER")) {
-        const errorMsg = document.getElementById('errorMsg');
-        errorMsg.innerHTML = `<strong>Action Required:</strong> Add your Google Client ID to <code>.env</code> to enable Admin Google Login.`;
-        errorMsg.style.display = 'block';
-        return;
-      }
       if (typeof google !== 'undefined') {
         google.accounts.id.prompt(); 
       }

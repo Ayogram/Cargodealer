@@ -13,14 +13,14 @@ const itemSchema = new mongoose.Schema({
 });
 
 const shipmentSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Optional for guests, required for logged-in
-  trackingId: { type: String, required: true, unique: true }, // Format: CDI-XXXXXX
-  service: { type: String, required: true, enum: ['Air Freight', 'Ocean Freight', 'Courier', 'Choose for Me'] },
-  route: { type: String, required: true }, // General route description
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  trackingId: { type: String, required: true, unique: true }, // Format: CDI-YYYY-XXXX
+  service: { type: String, required: true, enum: ['Air', 'Sea', 'Courier'] },
+  route: { type: String, required: true }, // Destination country/city
+  weight: { type: Number, default: 0 },
   
-  // New Dashboard Fields
+  // Package Details
   shippingTo: { type: String, default: '' },
-  shipper: { type: String, default: '' },
   recipient: {
     firstName: String,
     lastName: String,
@@ -31,8 +31,8 @@ const shipmentSchema = new mongoose.Schema({
   items: [itemSchema],
   totalValue: { type: Number, default: 0 },
   
-  currentIndex: { type: Number, default: 0 },
-  staffNote: { type: String, default: "Shipment created. Awaiting processing." },
+  currentIndex: { type: Number, default: 0 }, // 0: Received, 1: Processing, etc.
+  staffNote: { type: String, default: "Shipment request created. Awaiting package arrival at office." },
   history: [historySchema]
 }, { timestamps: true });
 

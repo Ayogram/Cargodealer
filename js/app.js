@@ -1,10 +1,11 @@
 const STATUSES = [
-  "Booking Confirmed",
-  "Pickup Scheduled",
-  "Picked Up",
-  "In Transit",
+  "Shipment Registered",
+  "Package Received at Lagos Office",
+  "Processing for Export",
+  "In Transit (Air/Sea Logistics)",
   "Arrived at Destination Hub",
-  "Delivered"
+  "Out for Delivery",
+  "Delivered Successfully"
 ];
 
 // Live tracking endpoint logic
@@ -76,13 +77,14 @@ if (trackingInputModal) {
 }
 
 function isValidTracking(id) {
-  return /^CDI-\d{6}$/.test(id);
+  // Matches CDI-YYYY-XXXX format (e.g. CDI-2024-1234)
+  return /^CDI-\d{4}-\d{4}$/.test(id);
 }
 
 function renderEmpty() {
   document.getElementById("summary").style.display = "none";
   document.getElementById("trackHelp").innerHTML =
-    'Enter a valid Tracking ID in the format <b>CDI-XXXXXX</b>. Try: <b>CDI-102938</b>';
+    'Enter a valid Tracking ID in the format <b>CDI-YYYY-XXXX</b>. Example: <b>CDI-2026-1029</b>';
   document.getElementById("staffNote").textContent = "—";
   renderTimeline(-1);
 }

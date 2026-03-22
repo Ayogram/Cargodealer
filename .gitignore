@@ -18,6 +18,10 @@ logs/
 dist/
 build/
 
+# Logs
+server_log.txt
+*.log
+
 # OS Files
 .DS_Store
 Thumbs.db

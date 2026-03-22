@@ -99,63 +99,12 @@
     </div>
 
     <form id="loginForm">
-      <div id="loginFields">
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="your@email.com" required onkeyup="checkCapsLock(event)">
-        </div>
-        
-        <div class="form-group">
-          <label for="password">Password</label>
-          <div class="password-wrapper">
-            <input type="password" id="password" name="password" placeholder="Enter password" required onkeyup="checkCapsLock(event)">
-            <span class="toggle-password" onclick="togglePasswordVisibility('password', 'eyeIcon')">
-              <svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div id="otpFields" style="display:none;">
-        <p style="color:#4a5568; font-size:14px; margin-bottom:15px; text-align:center;">
-          A 6-digit verification code has been sent to your email. Please enter it below to continue.
-        </p>
-        <label for="otp">Verification Code</label>
-        <input type="text" id="otp" name="otp" placeholder="000000" maxlength="6" style="text-align:center; letter-spacing:8px; font-size:20px; font-weight:bold;">
-      </div>
-      
-      <div class="terms-check" id="rememberBox">
-        <input type="checkbox" id="rememberMe" />
-        <label for="rememberMe" style="margin:0; font-weight:normal;">Remember Me?</label>
-      </div>
-
-      <button type="submit" class="btn-submit" id="loginFormBtn">Sign In</button>
-    </form>
+    <div id="googleBtnContainer" style="width: 100%; min-height: 48px; display: flex; justify-content: center; margin: 32px 0;"></div>
     
-    <div style="text-align: center; margin: 25px 0; color: #a0aec0; font-size: 14px; position:relative;">
-      <hr style="border:none; border-top:1px solid #e2e8f0; position:absolute; top:7px; width:100%; z-index:1;">
-      <span style="background:#fff; padding:0 10px; position:relative; z-index:2;">or</span>
+    <div class="link-text" style="border-top: 1px solid #f1f5f9; padding-top: 24px; margin-top: 24px;">
+      By continuing, you agree to our <a href="#">Service Terms</a>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      <!-- Real Google Sign-In Button Container (Required for the real popup action) -->
-      <div id="googleBtnContainer" style="width: 100%; min-height: 40px;"></div>
-      
-      <button type="button" class="social-btn" onclick="simLogin(this, event, 'Yahoo')">
-        <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M22.46 3L13.8 14.63v6.37H10.2v-6.37L1.54 3h4.31l5.95 8.44L18.15 3h4.31z" fill="#6001d2"/></svg>
-        Continue with Yahoo Mail
-      </button>
-      <button type="button" class="social-btn" onclick="focusEmail()" style="margin-bottom:0;">
-        <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4a5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        Continue with Email
-      </button>
-    </div>
-    
-    <div class="link-text">
-      Don't have an account? <a href="register.html">Sign up</a>
-    </div>
+  </div>
   </div>
 
   <script src="js/app.js"></script>
@@ -311,7 +260,7 @@
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. PROTOCOL GUARD: Check if opening as file://
+      // 1. PROTOCOL GUARD
       if (window.location.protocol === 'file:') {
         const guard = document.createElement('div');
         guard.style = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(17,24,39,0.95); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; text-align:center; padding:20px;';
@@ -335,64 +284,43 @@
       const savedEmail = localStorage.getItem('cargodealer_remembered_email');
       const emailInput = document.getElementById('email');
       const rememberCheck = document.getElementById('rememberMe');
-      
-      if(savedEmail && emailInput) {
+      if (savedEmail && emailInput) {
         emailInput.value = savedEmail;
         if(rememberCheck) rememberCheck.checked = true;
       }
+    });
 
-      // 3. INITIALIZE REAL GOOGLE SIGN-IN
+    function initGoogleAuth() {
       const clientId = "506898969583-f24k6jld869iq6hv303jqt3rk58le9f0.apps.googleusercontent.com";
       if (typeof google !== 'undefined') {
+        console.log("Initializing Google Auth...");
         google.accounts.id.initialize({
           client_id: clientId, 
           callback: handleGoogleResponse
         });
         
-        // Render the REAL button (This is the only way to get the Gmail-style popup)
         google.accounts.id.renderButton(
           document.getElementById("googleBtnContainer"),
           { 
             theme: "outline", 
             size: "large", 
-            width: 320, 
+            width: 360, 
             text: "signin_with",
             shape: "rectangular",
             logo_alignment: "left"
           }
         );
       }
-    });
+    }
+    window.addEventListener('load', initGoogleAuth);
+    document.addEventListener('DOMContentLoaded', initGoogleAuth);
 
-    // Google Action Check
     function startGoogleLogin() {
-      const clientId = "506898969583-f24k6jld869iq6hv303jqt3rk58le9f0.apps.googleusercontent.com";
-      if (!clientId || clientId.includes("PLACEHOLDER")) {
-        const errorMsg = document.getElementById('errorMsg');
-        errorMsg.innerHTML = `
-          <strong>Action Required: Google Setup Needed</strong><br>
-          <div style="font-size:12px; margin-top:5px; text-align:left; line-height:1.4;">
-            1. Go to your <code>.env</code> file.<br>
-            2. Replace <code>YOUR_GOOGLE_CLIENT_ID_PLACEHOLDER</code> with your real ID from Google Cloud Console.<br>
-            3. Restart the server (run <code>node api/index.js</code>).
-          </div>
-        `;
-        errorMsg.style.display = 'block';
-        return;
-      }
-
-      try {
-        if (typeof google !== 'undefined') {
-          google.accounts.id.prompt(); 
-        } else {
-          throw new Error("Google Identity SDK not loaded. Check internet connection.");
-        }
-      } catch (err) {
-        alert(err.message);
+      if (typeof google !== 'undefined') {
+        google.accounts.id.prompt(); 
       }
     }
 
-    // Real Google Auth Callback
     async function handleGoogleResponse(response) {
       const errorMsg = document.getElementById('errorMsg');
       try {
@@ -401,10 +329,8 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ idToken: response.credential })
         });
-        
         const data = await res.json();
         if (!res.ok) throw new Error(data.msg || 'Google login failed');
-        
         localStorage.setItem('cargodealer_token', data.token);
         localStorage.setItem('cargodealer_user', JSON.stringify(data.user));
         window.location.href = 'dashboard.html';

@@ -20,14 +20,7 @@ router.get('/stats', auth, async (req, res) => {
     res.json({
       user,
       totalShipments,
-      lastOrders,
-      usAddress: {
-        name: user.name,
-        address: "11969 Plano Road, suite " + (user.suiteNumber || "150-xxxx"),
-        city: "Dallas",
-        state: "TX",
-        zip: "75243"
-      }
+      lastOrders
     });
   } catch (err) {
     console.error(err.message);

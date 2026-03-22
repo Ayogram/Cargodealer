@@ -19,23 +19,43 @@ router.get('/:id', async (req, res) => {
 });
 
 // @route   POST /api/shipments
-// @desc    Create a shipment
-// @access  Private (Admin/Dealer)
+// @desc    Create a shipment request (Customer) or Receive at Office (Admin)
+// @access  Private
 router.post('/', auth, async (req, res) => {
   try {
-    const { trackingId, service, route, staffNote } = req.body;
+    const { service, route, recipient, items, totalValue } = req.body;
+    
+    // Generate Tracking ID: CDI-YYYY-XXXX
+    const year = new Date().getFullYear();
+    const count = await Shipment.countDocuments({ 
+      trackingId: new RegExp(`^CDI-${year}-`) 
+    });
+    const nextNum = (count + 1).toString().padStart(4, '0');
+    const trackingId = `CDI-${year}-${nextNum}`;
+
     let shipment = new Shipment({
-      trackingId: trackingId.toUpperCase(),
+      userId: req.user.id,
+      trackingId,
       service,
       route,
-      staffNote
+      shippingTo: route,
+      recipient,
+      items,
+      totalValue,
+      currentIndex: 0, // Received at Office (or Request Created)
+      staffNote: "Shipment request initiated. Please bring items to our Lagos office."
     });
+
     // Add initial history element
-    shipment.history.push({ statusIndex: 0, note: staffNote || 'Shipment created' });
+    shipment.history.push({ 
+      statusIndex: 0, 
+      note: "Request Created" 
+    });
+
     await shipment.save();
     res.json(shipment);
   } catch (err) {
-    console.error(err.message);
+    console.error('Shipment creation error:', err.message);
     res.status(500).send('Server Error');
   }
 });

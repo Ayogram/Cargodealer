@@ -338,59 +338,39 @@
         document.body.appendChild(guard);
         return;
       }
+    });
 
-      // 2. INITIALIZE REAL GOOGLE SIGN-IN
+    function initGoogleAuth() {
       const clientId = "506898969583-f24k6jld869iq6hv303jqt3rk58le9f0.apps.googleusercontent.com"; 
       if (typeof google !== 'undefined') {
+        console.log("Initializing Google Auth...");
         google.accounts.id.initialize({
           client_id: clientId, 
           callback: handleGoogleResponse
         });
         
-        // Render the REAL button (This is the only way to get the Gmail-style popup)
         google.accounts.id.renderButton(
           document.getElementById("googleBtnContainer"),
           { 
             theme: "outline", 
             size: "large", 
-            width: 320, 
+            width: 360, 
             text: "signup_with",
             shape: "rectangular",
             logo_alignment: "left"
           }
         );
       }
-    });
+    }
+    window.addEventListener('load', initGoogleAuth);
+    document.addEventListener('DOMContentLoaded', initGoogleAuth);
 
-    // Google Action Check
     function startGoogleLogin() {
-      const clientId = "506898969583-f24k6jld869iq6hv303jqt3rk58le9f0.apps.googleusercontent.com";
-      if (!clientId || clientId.includes("PLACEHOLDER")) {
-        const errorMsg = document.getElementById('errorMsg');
-        errorMsg.innerHTML = `
-          <strong>Action Required: Google Setup Needed</strong><br>
-          <div style="font-size:12px; margin-top:5px; text-align:left; line-height:1.4;">
-            1. Go to your <code>.env</code> file.<br>
-            2. Replace <code>YOUR_GOOGLE_CLIENT_ID_PLACEHOLDER</code> with your real ID from Google Cloud Console.<br>
-            3. Restart the server (run <code>node api/index.js</code>).
-          </div>
-        `;
-        errorMsg.style.display = 'block';
-        return;
-      }
-      
-      try {
-        if (typeof google !== 'undefined') {
-          google.accounts.id.prompt(); 
-        } else {
-          throw new Error("Google Identity SDK not loaded. Check internet connection.");
-        }
-      } catch (err) {
-        alert(err.message);
+      if (typeof google !== 'undefined') {
+        google.accounts.id.prompt(); 
       }
     }
 
-    // Real Google Auth Callback
     async function handleGoogleResponse(response) {
       const errorMsg = document.getElementById('errorMsg');
       try {

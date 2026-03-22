@@ -333,7 +333,11 @@ router.post('/google', checkDB, async (req, res) => {
       res.json({ token, user: { id: user.id, name: user.name, email, role: user.role, isVerified: user.isVerified } });
     });
   } catch (err) {
-    console.error('Google Auth Error:', err.message);
+    console.error('❌ Google Auth Error Details:', {
+      message: err.message,
+      stack: err.stack,
+      clientId: CLIENT_ID
+    });
     res.status(401).json({ msg: 'Google Token Verification Failed' });
   }
 });
